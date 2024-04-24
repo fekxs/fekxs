@@ -1,11 +1,22 @@
-body{
-    background-color: black;
-    padding: 0;
+html, body {
+    height: 100%;
     margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000000;
     overflow: hidden;
 }
+.container-main{
+    height: 100%;
+    width: 100%;
+}
 #main-header{
-    height: 8dvh;
+    height: 10%;
     width:100%;
     display: flex;
     align-items: center;
@@ -26,13 +37,13 @@ body{
     display: grid;
     place-items: center;
     height: 100%;
-    width: 40%;
+    width: fit-content;
 }
 #nav{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     letter-spacing: 1px;
     height: 100%;
-    width: 90%;
+    width: fit-content;
     font-size: 17px;
     display: flex;
     align-items: center;
@@ -40,6 +51,7 @@ body{
     flex-direction: row;
 }
 #nav>div{
+    margin: 10px;
     cursor: pointer;
     display: grid;
     place-items: center;
@@ -47,14 +59,20 @@ body{
     width: 12vh;
     height: 5vh;
     border-radius: 10px;
-    transition: all .5s ease-in-out;
+    transition: background-color .5s ease-in-out;
+}
+.menu{
+    display: none;
+    margin-left: 0px;
+    color: white;
+    font-size: 28px;
 }
 
 #content-body{
     display: grid;
     place-items: center;
-    font-size: 100px;
-    height: 82dvh;
+    font-size: 50px;
+    height: 80%;
     width:100%;
     color: white;
     background-color: rgb(21, 21, 21);
@@ -64,7 +82,7 @@ body{
     align-items: center;
     justify-content: space-around;
     flex-direction: column;
-    height: 8dvh;
+    height: 10%;
     width:100%;
     color: white;
     font-size: 30px;
@@ -82,4 +100,46 @@ body{
 }
 #home_div{
     width: 70%;
+}
+
+
+
+@media (max-width: 1200px) {
+    #main-header>div:first-child{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+    #main-header>div:first-child>img{
+        margin: 0;
+        margin-top: 8px;
+    }
+    #main-header>div:last-child{
+        width: 0px;
+    }
+    #nav{
+        position: absolute;
+        width: fit-content;
+        padding: 10px;
+        flex-direction: column;
+        height: fit-content;
+        left: 0;
+        top: 0;
+        border-radius: 10px;
+        margin-top: 20%;
+        background-color: black;
+        transform: translateX(-20vh);
+        overflow: hidden;
+        transition: all .5s ease-in-out;
+
+    }
+    #nav.open{
+        transform: translateX(0vh);
+    }
+    .menu{
+        font-size: 40px;
+        display: flex;
+    }
+
 }

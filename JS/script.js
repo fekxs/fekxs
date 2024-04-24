@@ -39,3 +39,11 @@ function content(page,object) {
     xhttp.open("GET", "Pages/"+page+".html", true);
     xhttp.send();
 }
+function open_nav(){
+    nav=document.getElementById("nav")
+    if(nav.classList.contains("open")){
+        nav.classList.remove("open")
+    }else{
+        nav.classList.add("open")
+    }
+}
