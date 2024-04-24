@@ -73,3 +73,13 @@ body{
     background-color: rgb(255, 255, 255);
     color: black !important;
 }
+.main-home{
+    display: grid;
+    place-items: center;
+    width: 100%;
+    overflow: hidden;
+    height: 100%;
+}
+#home_div{
+    width: 70%;
+}
