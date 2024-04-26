@@ -85,6 +85,9 @@ function  code_write(){
     setTimeout(function() {
         var codeline = document.querySelectorAll("#code_lines");
         var total = codeline.length;
+        if(total==0){
+            code_write()
+        }
         codeline.forEach(function(element, index) {
             setTimeout(function() {
                 element.style.opacity = 1;
