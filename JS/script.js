@@ -24,14 +24,7 @@ header();
 footer();
 var prev=0
 function content(page,object) {
-    if(page=="Home"){//Home Page doesn't need footer
-        document.getElementById("main-footer").style.display="None";
-        document.getElementById("content-body").style.height="90%";
-        code_write()
-    }else{
-        document.getElementById("main-footer").style.display="flex";
-        document.getElementById("content-body").style.height="85%";
-    }
+    
     if(prev==0){prev=object;object.classList.add("select")}
     else{
         prev.classList.remove("select");
@@ -42,6 +35,15 @@ function content(page,object) {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById("content-body").innerHTML = this.responseText;
+            if(page=="Home"){//Home Page doesn't need footer
+                document.getElementById("main-footer").style.display="None";
+                document.getElementById("content-body").style.height="90%";
+                laptop_write()
+                code_write()
+            }else{
+                document.getElementById("main-footer").style.display="flex";
+                document.getElementById("content-body").style.height="85%";
+            }
         }
     };
     xhttp.open("GET", "Pages/"+page+".html", true);
@@ -59,35 +61,14 @@ function open_nav(){
     }
 }
 
-function readmore(){
-    read=document.getElementById("home-view")
-    more=document.getElementById("more-details")
-    feat=document.getElementById("feabox")
-    if(read.classList.contains("more")){
-        read.classList.remove("more")
-        setTimeout(function() {
-            feat.classList.remove("open")
-          }, 100);
-          setTimeout(function() {
-            more.style.display="none";
-          }, 1000);
-    }
-    else{
-        more.style.display="flex";
-        read.classList.add("more")
-        setTimeout(function() {
-            feat.classList.add("open")
-          }, 300);
-    }
-}
-
 function  code_write(){
     setTimeout(function() {
         var codeline = document.querySelectorAll("#code_lines");
         var total = codeline.length;
         if(total==0){
-            code_write()
+            laptop_write()
         }
+        
         codeline.forEach(function(element, index) {
             setTimeout(function() {
                 element.style.opacity = 1;
@@ -111,5 +92,89 @@ function code_clean(codeline){
         code_write()
     }, 1000);
 }
+function laptop_write(){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("laptop-welcome").innerHTML = this.responseText;
+        }
+    };
+    xhttp.open("GET", "Images/Laptop/svgs.html", true);
+    xhttp.send();
+
+}
+
+let onCooldown = false;
+
+function startCooldown() {
+    onCooldown = true;
+    setTimeout(() => {
+        onCooldown = false;
+    }, 900); 
+}
+
+function scroller_page(event) {
+    if (!onCooldown) {
+        startCooldown()
+        const scrollContainer = event.target;
+        const currentScroll = scrollContainer.scrollTop;
+        const previousScroll = scrollContainer.dataset.previousScroll || 0;
+        let scrollDirection = 0;
+        if(previousScroll!=0){
+            if (currentScroll < previousScroll) {
+                scrollDirection = 0;
+            } else if (currentScroll > previousScroll) {
+                scrollDirection = 1;
+            }
+        }
+        scroller(scrollDirection)
+        scrollContainer.dataset.previousScroll = currentScroll;
+    } else {
+    }
+}
+
+
+function scroller(way) {
+    feat=document.getElementById("feabox")
+    const mainContainer = document.getElementById('the-home');
+    if(way==0){
+            feat.classList.add("open")
+        child = mainContainer.lastElementChild;
+    }
+    else{
+            feat.classList.remove("open")
+        child = mainContainer.firstElementChild;
+    }
+    child.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+var selected_feature=0
+function feature_select(object,nav){
+    select_int=document.getElementById('feat-option'+selected_feature)
+    select_int.style.backgroundColor="transparent";
+    const mainContainer = document.getElementById('feabox');
+    if(nav==0){
+        if(selected_feature==0){
+            selected_feature=2
+        }
+        else{
+            selected_feature--;
+        }
+        
+    }
+    else{
+        if(selected_feature==2){
+            selected_feature=0
+        }
+        else{
+            selected_feature++;
+        }
+    }
+    select_int=document.getElementById('feat-option'+selected_feature)
+    select_int.style.backgroundColor="#0fd6e3";
+    child = mainContainer.children[selected_feature];
+    child.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
 
 
