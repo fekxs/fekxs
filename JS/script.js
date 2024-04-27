@@ -38,6 +38,7 @@ function content(page,object) {
             if(page=="Home"){//Home Page doesn't need footer
                 document.getElementById("main-footer").style.display="None";
                 document.getElementById("content-body").style.height="90%";
+                attachScrollListener();
                 laptop_write()
                 code_write()
             }else{
@@ -110,31 +111,35 @@ function startCooldown() {
     onCooldown = true;
     setTimeout(() => {
         onCooldown = false;
-    }, 900); 
+    }, 1200); 
 }
 
-function scroller_page(event) {
-    if (!onCooldown) {
-        startCooldown()
-        const scrollContainer = event.target;
-        const currentScroll = scrollContainer.scrollTop;
-        const previousScroll = scrollContainer.dataset.previousScroll || 0;
-        let scrollDirection = 0;
-        if(previousScroll!=0){
-            if (currentScroll < previousScroll) {
-                scrollDirection = 0;
-            } else if (currentScroll > previousScroll) {
-                scrollDirection = 1;
+
+var scrollTimeout;
+var prevScrollPos = 0;
+data=0
+function attachScrollListener() {
+    var homeElement = document.getElementById("the-home");
+    if (homeElement) {
+        homeElement.addEventListener("scroll", function(event) {
+            event.preventDefault(); 
+            var currentScrollPos = this.scrollTop;
+            var scrollDirection = currentScrollPos > prevScrollPos ? 0 : 1;
+            prevScrollPos = currentScrollPos;
+            if(data==0){
+                scroller(scrollDirection,1)
+                data=1;
+                setTimeout(function() {
+                   data=0
+                }, 900);
             }
-        }
-        scroller(scrollDirection)
-        scrollContainer.dataset.previousScroll = currentScroll;
-    } else {
+            
+        });
     }
 }
 
 
-function scroller(way) {
+function scroller(way,object) {
     feat=document.getElementById("feabox")
     const mainContainer = document.getElementById('the-home');
     if(way==0){
@@ -145,10 +150,13 @@ function scroller(way) {
             feat.classList.remove("open")
         child = mainContainer.firstElementChild;
     }
-    mainContainer.scroll({
-        behavior: 'smooth',
-        top: child.offsetTop 
-      });
+    if(object==0){
+        mainContainer.scroll({
+            behavior: 'smooth',
+            top: child.offsetTop 
+          });
+    }
+    
 }
 
 var selected_feature=0
