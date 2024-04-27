@@ -145,7 +145,10 @@ function scroller(way) {
             feat.classList.remove("open")
         child = mainContainer.firstElementChild;
     }
-    child.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    mainContainer.scroll({
+        behavior: 'smooth',
+        top: child.offsetTop 
+      });
 }
 
 var selected_feature=0
@@ -173,7 +176,11 @@ function feature_select(object,nav){
     select_int=document.getElementById('feat-option'+selected_feature)
     select_int.style.backgroundColor="#0fd6e3";
     child = mainContainer.children[selected_feature];
-    child.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    offset=child.offsetTop-790;
+    mainContainer.scrollTo({
+        behavior: 'smooth',
+        top: offset 
+      });
 }
 
 
