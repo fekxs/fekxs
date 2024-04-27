@@ -183,8 +183,9 @@ function feature_select(object,nav){
     }
     select_int=document.getElementById('feat-option'+selected_feature)
     select_int.style.backgroundColor="#0fd6e3";
+    firstchild = mainContainer.children[0];
     child = mainContainer.children[selected_feature];
-    offset=child.offsetTop-790;
+    offset=child.offsetTop-firstchild.offsetTop;
     mainContainer.scrollTo({
         behavior: 'smooth',
         top: offset 

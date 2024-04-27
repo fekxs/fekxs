@@ -740,10 +740,12 @@ body {
     }
     .featuer-body{
         margin-top: 0px;
+        width: 45vh;
+        overflow: hidden;
         display: grid;
-        overflow-y: hidden;
     }
     .featuers{
+        
         transform: translateY(0px);
         transform: scale(.85) !important;
         margin-top: -30px;
