@@ -1,10 +1,3 @@
-<style>
-  .main-projects {
-    height: 100%;
-    width: 100%;
-  }
-</style>
-
 <div class="main-projects">
   <div class="timeline">
     <div class="outer">
@@ -76,15 +69,29 @@
 
   /* Timeline Container */
   .timeline {
+    overflow-y: auto;
     background: var(--primary-color);
-    margin: 20px auto;
+    margin: auto;
     padding: 20px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
   }
 
+  .main-projects {
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    background: var(--background-color);
+    font-family: var(--font);
+    display: flex;
+    justify-content: center;
+  }
   /* Card container */
   .card {
     position: relative;
-    max-width: 400px;
+    max-width: 800px;
   }
 
   /* setting padding based on even or odd */
