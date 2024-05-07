@@ -304,15 +304,24 @@
   }
 
   /* Information about the timeline */
+
   .info {
     display: flex;
     flex-direction: column;
     background: #333;
     color: gray;
     font-size: 25px;
-    border-radius: 10px;
+
     padding: 10px;
     min-width: 60%;
+    border: 2px solid transparent; /* Start with transparent border */
+    transition: border-color 0.3s ease, border-radius 0.3s ease; /* Add transition properties */
+  }
+
+  /* Add hover effect */
+  .info:hover {
+    border-color: aqua; /* Change border color on hover */
+    border-radius: 40px; /* Change border radius on hover */
   }
 
   /* Title of the card */
